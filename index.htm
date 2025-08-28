@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Битва Звёзд</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    
+    <div id="mainScreen">
+        <div class="header">
+            <h1 class="title">Битва Звёзд</h1>
+            <div class="balance-container">
+                <span class="balance" id="balance">1000</span>
+                <button class="add-balance" id="addBalanceBtn">+</button>
+            </div>
+        </div>
+
+        <button class="main-button" id="selectBetBtn">+ Выбрать ставку</button>
+
+        <div class="settings-panel">
+            <div class="settings-group">
+                <div class="settings-title">Количество игроков</div>
+                <div class="options-container">
+                    <div class="option" data-type="players" data-value="2">2</div>
+                    <div class="option" data-type="players" data-value="3">3</div>
+                    <div class="option" data-type="players" data-value="4">4</div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-title">Тип сражения</div>
+                <div class="options-container">
+                    <div class="option" data-type="battleType" data-value="open">Открытая комната</div>
+                    <div class="option" data-type="battleType" data-value="closed">Закрытая комната</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bet-info">
+            <p>Текущая ставка: <span id="currentBet">не выбрана</span></p>
+            <p>Количество игроков: <span id="currentPlayers">2</span></p>
+            <p>Тип комнаты: <span id="currentBattleType">открытая</span></p>
+        </div>
+
+        <button class="start-button" id="startButton">Начать битву</button>
+    </div>
+
+    <div id="battleScreen" class="hidden">
+        <div class="battle-header">
+            <span class="battle-id">Битва #<span id="battleNumber">1234</span></span>
+            <span class="battle-balance">Баланс: <span id="battleBalance">1000</span> ⭐</span>
+        </div>
+
+        <div class="battle-info">
+            <div class="bet-amount">Ставка: <span id="battleBetAmount">50</span></div>
+        </div>
+
+        <div id="waitingPlayers" class="waiting-players hidden">
+            <div class="waiting-spinner">⏳</div>
+            <div class="waiting-text">Ожидание игроков...</div>
+        </div>
+
+        <div id="playersContainer" class="players-container"></div>
+
+        <div id="diceContainer" class="dice-container hidden">
+            <div class="dice-title">Ваш бросок</div>
+            <div class="dice" id="playerDice">🎲</div>
+            <div class="dice-result" id="diceResult">0</div>
+            <button class="roll-button" id="rollDiceBtn">Бросить кубик</button>
+        </div>
+
+        <div id="battleWinner" class="battle-winner hidden">
+            <div class="winner-title">🏆 Победитель</div>
+            <div class="winner-name" id="winnerName">Игрок 1</div>
+        </div>
+
+        <!-- Кнопка "Играть снова" -->
+        <button id="replayButton" class="replay-button hidden">🔄 Играть снова</button>
+
+        <button class="back-button" id="backToMainBtn">← На главную</button>
+    </div>
+
+    <!-- Модальное окно выбора ставки -->
+    <div id="betModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-modal" id="closeBetModal">×</button>
+            <h2 class="modal-title">Выберите ставку</h2>
+            <div class="bet-options">
+                <div class="bet-option" data-value="50">50 ⭐</div>
+                <div class="bet-option" data-value="100">100 ⭐</div>
+                <div class="bet-option" data-value="200">200 ⭐</div>
+                <div class="bet-option" data-value="500">500 ⭐</div>
+            </div>
+            <button class="action-button" id="confirmBetBtn">Подтвердить</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно пополнения баланса -->
+    <div id="balanceModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-modal" id="closeBalanceModal">×</button>
+            <h2 class="modal-title">Пополнение баланса</h2>
+            <div class="input-group">
+                <div class="input-title">Количество звезд (мин. 10)</div>
+                <input type="number" class="stars-input" id="starsInput" min="10" value="100">
+            </div>
+            <button class="action-button" id="confirmBalanceBtn">Пополнить</button>
+        </div>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body>
+</html>
