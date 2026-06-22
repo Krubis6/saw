@@ -1,0 +1,32 @@
+name: Project Integrity Check
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  verify-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          echo "Запуск проверки целостности проекта..."
+          if [ -f "index.html" ]; then
+            echo "Файл index.html найден."
+          else
+            echo "Ошибка: index.html отсутствует!"
+            exit 1
+          fi
+          if [ -f "CHANGELOG.md" ]; then
+            echo "Файл CHANGELOG.md найден."
+          else
+            echo "Ошибка: CHANGELOG.md отсутствует!"
+            exit 1
+          fi
+          echo "Все проверки успешно пройдены!"
